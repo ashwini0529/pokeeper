@@ -5,6 +5,8 @@
 import pykemon
 import urllib
 import urllib2
+import json
+import requests
 # Menu function
 
 def menu():
@@ -22,9 +24,35 @@ def menu():
 def searchPokemonByID(id):
 	url = 'http://pokeapi.co/api/v1/pokemon/'+str(id)
 	print url
-	response = urllib.urlopen(url)
-	pokeData = response.read()
-	return pokeData
+	response = requests.get(url)
+	retrievedData = response.json()
+	#Printing all important data.
+
+	print 'Pokemon Name : ' + retrievedData['name']
+	print 'Pokedex ID : ' + str(retrievedData['pkdx_id'])
+	print 'Species : ' + retrievedData['species']
+	print 'Weight of Pokemon : ' + retrievedData['weight']
+	print 'Height of Pokemon : ' + retrievedData['height']
+	print 'Gets Evolved to :' + retrievedData['evolutions'][0]['to']
+	print 'Abilities : '
+	abilityCounter = 1
+	for abilityName in retrievedData['abilities']:
+		print str(abilityCounter) + '). ' +  abilityName['name']
+		abilityCounter = abilityCounter+1 #Increase ability Index
+	print 'Growth Rate : ' + str(retrievedData['growth_rate'])
+	print 'How happy your Pokemon is : ' + str(retrievedData['happiness'])
+	print 'Your Pokemon moves : '
+	movesCounter = 1
+	for movesOfThePokemon in retrievedData['moves']:
+		print str(movesCounter) + '). ' +  movesOfThePokemon['name']
+		movesCounter = movesCounter+1 #Increase ability Index
+	
+	
+	
+
+
+
+
 #Print menu on CLI...
 print menu()
 
@@ -37,5 +65,5 @@ userInput = int(raw_input('Enter your choice here: '))
 
 if userInput==1:
 	pokemonID = int(raw_input('Please enter the Pokemon ID : (Eg. 1 for Bulbasaur, 25 for Pikachu ^_^ ) : '))
-	print searchPokemonByID(pokemonID)
+	searchPokemonByID(pokemonID)
 
