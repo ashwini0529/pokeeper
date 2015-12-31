@@ -46,12 +46,11 @@ def searchPokemonByID(id):
 	for movesOfThePokemon in retrievedData['moves']:
 		print str(movesCounter) + '). ' +  movesOfThePokemon['name']
 		movesCounter = movesCounter+1 #Increase ability Index
+	print 'Type of attacks : '
+	typeOfPokemonCounter = 1
+	for typeOfPokemon in retrievedData['types']:
+		print str(typeOfPokemonCounter) + '). ' + typeOfPokemon['name']
 	
-	
-	
-
-
-
 
 #Print menu on CLI...
 print menu()
