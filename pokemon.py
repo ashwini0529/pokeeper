@@ -33,7 +33,10 @@ def searchPokemonByID(id):
 	print 'Species : ' + retrievedData['species']
 	print 'Weight of Pokemon : ' + retrievedData['weight']
 	print 'Height of Pokemon : ' + retrievedData['height']
-	print 'Gets Evolved to :' + retrievedData['evolutions'][0]['to']
+	if retrievedData['evolutions'][0]['to'] !=[]:
+		print 'Gets Evolved to :' + retrievedData['evolutions'][0]['to']
+	else:
+		print 'Evolution level : Final'
 	print 'Abilities : '
 	abilityCounter = 1
 	for abilityName in retrievedData['abilities']:
@@ -44,13 +47,14 @@ def searchPokemonByID(id):
 	print 'Your Pokemon moves : '
 	movesCounter = 1
 	for movesOfThePokemon in retrievedData['moves']:
-		print str(movesCounter) + '). ' +  movesOfThePokemon['name']
+		print '\t' + str(movesCounter) + '). ' +  movesOfThePokemon['name']
 		movesCounter = movesCounter+1 #Increase ability Index
 	print 'Type of attacks : '
 	typeOfPokemonCounter = 1
 	for typeOfPokemon in retrievedData['types']:
-		print str(typeOfPokemonCounter) + '). ' + typeOfPokemon['name']
-	
+		print '\t' + str(typeOfPokemonCounter) + '). ' + typeOfPokemon['name']
+		typeOfPokemonCounter = typeOfPokemonCounter+1
+	print 'Defence Rate :' + str(retrievedData['defense'])
 
 #Print menu on CLI...
 print menu()
